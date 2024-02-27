@@ -1,0 +1,15 @@
+[Unit]
+Description=Send a Telegram notification, when the machine is shutting down
+DefaultDependencies=no
+Before=shutdown.target
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+Type=oneshot
+ExecStop=/opt/script/telegram-notification/telegram_shutdown.py
+WorkingDirectory=/opt/script/telegram-notification/
+RemainAfterExit=true
+
+[Install]
+WantedBy=halt.target reboot.target shutdown.target
